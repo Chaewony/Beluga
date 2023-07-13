@@ -8,8 +8,8 @@ public:
 	{
 		UE_LOG(LogBeluga, Display, TEXT("BelugaModule::StartupModule"));
 
-		extern void StringTest();
-		StringTest();
+		/*extern void StringTest();
+		StringTest();*/
 	}
 	virtual void ShutdownModule() override
 	{
