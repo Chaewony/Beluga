@@ -1,8 +1,8 @@
 #include "BelugaMinimal.h"
 #include "Misc/AutomationTest.h"
 
+//FString 사용해보기
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBelugaStringTest, "Beluga.String", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::EngineFilter)
-
 bool FBelugaStringTest::RunTest(const FString& Parameters)
 {
 	// 생성, 대입
@@ -133,104 +133,37 @@ bool FBelugaStringTest::RunTest(const FString& Parameters)
 	return true;
 }
 
+//FName 사용해보기
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBelugaNameTest, "Beluga.Name", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::EngineFilter)
 
 bool FBelugaNameTest::RunTest(const FString& Parameters)
 {
+	 //Compare
+	{
+		FName name = FName(TEXT("TestFName"));
+		TestTrue(TEXT("Compare"), name.Compare("TestFName") == 0);
+	}
+
+	//연산자 < 
+	{
+		FName name1 = FName(TEXT("abcd"));
+		FName name2 = FName(TEXT("efgh"));
+		TestTrue(TEXT("Compare"), name1<name2);
+	}
+
 	return true;
 }
-//void StringTest()
-//{
-//	//길이 구하기 
-//	{
-//		FString str(TEXT("str"));
-//		int32 LenStr = str.Len();
-//		check(LenStr == 3);
-//	}
-//	
-//	// 생성
-//		// char		"asdf"
-//		// wchar	L"asdf"
-//		// tchar	TEXT("asdf")
-//
-//	{
-//		FString str0(L"wchar");
-//		FString str1("char");
-//		FString str2(TEXT("tchar"));
-//	}
-//
-//
-//	// 대입 연산자 = 
-//
-//	// Printf
-//
-//	// Format
-//
-//	// operator []
-//
-//	// 대소비교
-//
-//	// TCHAR* 얻기
-//	// operator*
-//
-//	// 길이 구하기
-//
-//	// Replace
-//	{
-//		FString str(TEXT("asdf"));
-//		FString result = str.Replace(TEXT("sd"), TEXT("ds"));
-//		check(result == TEXT("adsf"));
-//	}
-//
-//	// Insert
-//
-//	// clear
-//
-//	// Split
-//
-//	// IsEmpty
-//	{
-//		FString str(TEXT("asdf"));
-//		check(!str.IsEmpty());
-//	}
-//
-//	// Shrink
-//	{
-//		FString str(TEXT("Hello World!"));
-//		str.Shrink();
-//	}
-//
-//	// RemoveAt
-//
-//	// find 로 인덱스
-//
-//	// Left
-//	{
-//		FString str(TEXT("asdfghjk"));
-//		FString out = str.Left(4);
-//		check(out == TEXT("asdf"));
-//	}
-//	// Mid
-//	/*{
-//		FString str(TEXT("asdfghjk"));
-//		FString out = str.Mid(4);
-//		check(out == TEXT("dfgh"));
-//	}*/
-//	// Right
-//	{
-//		FString str(TEXT("asdfghjk"));
-//		FString out = str.Mid(4);
-//		check(out == TEXT("ghjk"));
-//	}
-//
-//	// 대문자로 변환, 소문자로 변환
-//	{
-//		FString str0(TEXT("asdf"));
-//		FString out0 = str0.ToUpper();
-//		check(out0 == TEXT("ASDF"));
-//
-//		FString str1(TEXT("ASDF"));
-//		FString out1 = str1.ToLower();
-//		check(out1 == TEXT("asdf"));
-//	}
-//}
+
+//FText 사용해보기
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBelugaTextTest, "Beluga.Text", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::EngineFilter)
+
+bool FBelugaTextTest::RunTest(const FString& Parameters)
+{
+	{
+		FText helloWorld = NSLOCTEXT("MyNamespace", "HelloWorld", "Hello World!");
+		#define LOCTEXT_NAMESPACE "MyNamespace"
+		FText goodbyeWorld = LOCTEXT("GoodbyeWorld", "Goodbye World!");
+		#undef LOCTEXT_NAMESPACE
+	}
+	return true;
+}
