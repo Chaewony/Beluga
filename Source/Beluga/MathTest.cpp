@@ -5,6 +5,30 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBelugaVectorTest, "Beluga.Vector", EAutomation
 
 bool FBelugaVectorTest::RunTest(const FString& Parameters)
 {
+	//하나의 요소에 접근
+	{
+		FVector vector(0.0, 1.0, 2.0);
+		vector.X = 5.0;
+
+		TestEqual(TEXT("FVector"), vector, FVector(5.0, 1.0, 2.0));
+	}
+	
+	//벡터 연산
+	{
+		FVector vector1(0.0, 1.0, 2.0);
+		FVector vector2(1.0, 1.0, 1.0);
+
+		TestEqual(TEXT("FVector +"), vector1 + vector2, FVector(1.0, 2.0, 3.0));
+	}
+
+	//벡터 정규화
+	{
+		FVector vector(0.0, 5.0, 0.0);
+		vector.Normalize();
+
+		TestEqual(TEXT("FVector Normalized"), vector, FVector(0.0, 1.0, 0.0));
+	}
+
 	return true;
 }
 
@@ -12,13 +36,13 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBelugaRotatorTest, "Beluga.Rotator", EAutomati
 
 bool FBelugaRotatorTest::RunTest(const FString& Parameters)
 {
-	return true;
-}
+	// yaw, pitch, roll
+	FRotator rotator(0.1, 0.1, 0.1);
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBelugaQuatTest, "Beluga.Quat", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::EngineFilter)
+	rotator.Add(1.0, 1.0, 1.0);
+	//근사치 equal 판별어려움
 
-bool FBelugaQuatTest::RunTest(const FString& Parameters)
-{
+
 	return true;
 }
 
@@ -26,6 +50,10 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBelugaMatrixTest, "Beluga.Matrix", EAutomation
 
 bool FBelugaMatrixTest::RunTest(const FString& Parameters)
 {
+	//FMatrix 초기화
+	FVector vec(0.1, 0.1, 0.1);
+	FMatrix mat(vec, vec, vec, vec);
+
 	return true;
 }
 
@@ -33,5 +61,9 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBelugaTransformTest, "Beluga.Transform", EAuto
 
 bool FBelugaTransformTest::RunTest(const FString& Parameters)
 {
+	//FTransform 초기화
+	FRotator rot(0.1, 0.1, 0.1);
+	FVector vec(0.1, 0.1, 0.1);
+	FTransform trans(rot, vec, vec);
 	return true;
 }
