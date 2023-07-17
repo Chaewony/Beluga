@@ -1,20 +1,6 @@
-#include "BelugaMinimal.h"
-DEFINE_LOG_CATEGORY(LogBeluga);
+// Copyright Epic Games, Inc. All Rights Reserved.
 
-class FBelugaModule : public FDefaultGameModuleImpl
-{
-public:
-	virtual void StartupModule() override
-	{
-		UE_LOG(LogBeluga, Display, TEXT("BelugaModule::StartupModule"));
+#include "Beluga.h"
+#include "Modules/ModuleManager.h"
 
-		/*extern void StringTest();
-		StringTest();*/
-	}
-	virtual void ShutdownModule() override
-	{
-		UE_LOG(LogBeluga, Display, TEXT("BelugaModule::ShutdownModule"));
-	}
-};
-
-IMPLEMENT_PRIMARY_GAME_MODULE(FBelugaModule, Beluga, "Beluga");
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, Beluga, "Beluga" );
